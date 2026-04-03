@@ -11,16 +11,16 @@
             background-color: #f4f5f7;
             margin: 0;
             padding: 0;
-            min-height: 150vh; /* Fixed öğelerin scroll testini yapmak için uzun sayfa */
+            min-height: 150vh;
         }
 
-        /* 1. KISA BAŞLIK ALANI */
+        /* KISA BAŞLIK ALANI */
         header {
             text-align: center;
             padding: 30px 20px;
             background-color: #ffffff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 60px;
+            margin-bottom: 80px; /* Kartın üstteki etiketleri için biraz daha boşluk bırakıldı */
         }
 
         header h1 {
@@ -29,14 +29,14 @@
             font-size: 24px;
         }
 
-        /* ALT BİLGİ ALANI (FOOTER) */
+        /* ALT BİLGİ ALANI */
         footer {
             text-align: center;
             padding: 20px;
             background-color: #333;
             color: white;
             position: absolute;
-            bottom: -50vh; /* Sayfanın en altında durması için */
+            bottom: -50vh;
             width: 100%;
         }
 
@@ -53,9 +53,8 @@
             font-weight: bold;
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            /* Etkileşim 1: Hover & Transition */
             transition: background-color 0.3s ease, transform 0.2s ease;
-            cursor: pointer; /* Cursor Kuralı 1 */
+            cursor: pointer;
         }
 
         .fixed-home:hover {
@@ -63,7 +62,6 @@
         }
 
         .fixed-home:active {
-            /* Etkileşim 2: Active Efekti */
             transform: scale(0.95);
         }
 
@@ -78,9 +76,8 @@
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             z-index: 100;
-            /* Etkileşim 3: Hover Animasyonu */
             transition: transform 0.3s ease;
-            cursor: pointer; /* Cursor Kuralı 2 */
+            cursor: pointer;
         }
 
         .fixed-help:hover {
@@ -89,18 +86,29 @@
 
         /* POSITION: RELATIVE - ANA KAPSAYICI */
         .card-container {
-            position: relative; /* ZORUNLU KURAL */
+            position: relative;
             width: 550px;
             max-width: 90%;
             margin: 0 auto;
-            background-color: #e6e6fa; /* PDF görselindeki gibi açık mor */
+            background-color: #e6e6fa;
             padding: 60px 40px;
             border-radius: 16px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            overflow: hidden; /* Taşmaları engellemek için */
+            /* overflow: hidden; BURADAN KALDIRILDI YERİNE AŞAĞIDAKİ YAPI KURULDU */
         }
 
-        /* Z-INDEX ÖRNEĞİ: Dekoratif Arka Plan Şekli */
+        /* ARKA PLAN ŞEKLİNİ SINIRLAYAN YENİ YAPI */
+        .card-bg-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden; /* Sadece şekli kesecek, rozetleri etkilemeyecek */
+            z-index: 1;
+        }
+
         .card-bg-shape {
             position: absolute;
             bottom: -50px;
@@ -109,12 +117,11 @@
             height: 300px;
             background-color: rgba(255, 255, 255, 0.4);
             border-radius: 50%;
-            z-index: 1; /* Alt Katman */
         }
 
         .card-content {
             position: relative;
-            z-index: 2; /* Üst Katman: Şeklin üstünde durmasını sağlar */
+            z-index: 2;
         }
 
         .card-content h2 {
@@ -132,9 +139,9 @@
             max-width: 85%;
         }
 
-        /* POSITION: ABSOLUTE ÖĞELER (En az 3 adet) */
+        /* POSITION: ABSOLUTE ÖĞELER */
         .badge {
-            position: absolute; /* ZORUNLU KURAL */
+            position: absolute;
             padding: 8px 16px;
             border-radius: 6px;
             font-weight: bold;
@@ -143,23 +150,20 @@
             z-index: 3;
         }
 
-        /* Absolute Öğe 1 */
         .badge-free {
             top: -15px;
             left: -15px;
-            background-color: #fff9c4; /* Açık sarı */
+            background-color: #fff9c4;
             color: #5c5000;
         }
 
-        /* Absolute Öğe 2 */
         .badge-date {
-            top: 15px;
-            right: 15px;
-            background-color: #e8f5e9; /* Açık yeşil */
+            top: -15px;
+            right: -15px;
+            background-color: #e8f5e9;
             color: #1b5e20;
         }
 
-        /* Absolute Öğe 3 */
         .badge-location {
             bottom: 70px;
             right: 40px;
@@ -169,19 +173,16 @@
             padding: 12px 20px;
         }
 
-        /* Absolute Öğe 4 ve Etkileşimli Alan */
         .badge-action {
             bottom: -15px;
             right: 20px;
-            background-color: #ffebee; /* Açık kırmızı/pembe */
+            background-color: #ffebee;
             color: #b71c1c;
             border: 2px solid #ffcdd2;
-            cursor: pointer; /* Cursor Kuralı 3 */
-            /* Etkileşim 4: Keyframes Animasyonu */
+            cursor: pointer;
             animation: pulse 2s infinite ease-in-out; 
         }
 
-        /* Keyframes Animasyonu */
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 205, 210, 0.7); }
             50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 205, 210, 0); }
@@ -202,7 +203,9 @@
     <main>
         <div class="card-container">
             
-            <div class="card-bg-shape"></div>
+            <div class="card-bg-wrapper">
+                <div class="card-bg-shape"></div>
+            </div>
 
             <div class="badge badge-free">Ücretsiz</div>
             <div class="badge badge-date">24 Nisan</div>
